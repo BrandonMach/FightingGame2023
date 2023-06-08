@@ -51,4 +51,25 @@ MonoBehaviour:
       m_SpriteOverride: {fileID: 873857865, guid: e43460acf6313f746b5d49128f623c24, type: 3}
     m_FromMain: 0
     m_EntryOverrideCount: 2
+  - m_Name: Punch
+    m_Hash: 757096284
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: blue atlas_11
+      m_Hash: 539107214
+      m_Sprite: {fileID: -143467801, guid: e43460acf6313f746b5d49128f623c24, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -143467801, guid: e43460acf6313f746b5d49128f623c24, type: 3}
+    - m_Name: blue atlas_12
+      m_Hash: 959139380
+      m_Sprite: {fileID: -1338066691, guid: e43460acf6313f746b5d49128f623c24, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1338066691, guid: e43460acf6313f746b5d49128f623c24, type: 3}
+    - m_Name: blue atlas_13
+      m_Hash: 237797026
+      m_Sprite: {fileID: 79086100, guid: e43460acf6313f746b5d49128f623c24, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 79086100, guid: e43460acf6313f746b5d49128f623c24, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 3
   m_PrimaryLibraryGUID: 
