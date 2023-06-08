@@ -269,9 +269,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 0.8679245, g: 0, b: 0, a: 1}
-  m_FlipX: 0
+  m_Sprite: {fileID: -1373204611, guid: 58e686f615384b540a4603dad1bf54ef, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
@@ -288,12 +288,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 619662704}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.69, y: -3.14, z: 0}
-  m_LocalScale: {x: 1, y: 2, z: 1}
+  m_LocalPosition: {x: 3.69, y: -1.38, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &619662707
 MonoBehaviour:
@@ -307,8 +307,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a3ddddb33641294395c610dca0ba5b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _forward: 0
-  _back: 0
+  _forward: 275
+  _back: 276
   _jump: 273
   _punch: 0
   _kick: 0
@@ -327,18 +327,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playernNum: 2
   _horizontal: 0
-  _groundSpeed: 4
-  _airSpeed: 0.5
+  _groundSpeed: 3
+  _airSpeed: 5
   _jumpingPower: 7.5
   _stageCenter: {fileID: 1194720823}
-  _isFacingRight: 1
+  _frontIsRight: 1
   _rb: {fileID: 619662710}
   _groundCheck: {fileID: 619662706}
   _groundLayer:
     serializedVersion: 2
     m_Bits: 64
   idle: 0
-  _groundCheckRange: 0.76
+  _groundCheckRange: 1.48
   isOnGround: 0
 --- !u!61 &619662709
 BoxCollider2D:
@@ -353,18 +353,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.21133333}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.28866667}
-    oldSize: {x: 1, y: 1}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.4666667, y: 2.4666667}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.4666667, y: 2.4666667}
   m_EdgeRadius: 0
 --- !u!50 &619662710
 Rigidbody2D:
@@ -540,7 +540,7 @@ MonoBehaviour:
   _airSpeed: 2.5
   _jumpingPower: 7.5
   _stageCenter: {fileID: 619662706}
-  _isFacingRight: 1
+  _frontIsRight: 1
   _rb: {fileID: 1194720824}
   _groundCheck: {fileID: 1194720823}
   _groundLayer:
@@ -596,7 +596,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1622009718
 GameObject:
@@ -681,7 +681,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1622009721
 BoxCollider2D:

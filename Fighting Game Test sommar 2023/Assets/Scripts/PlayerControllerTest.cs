@@ -11,7 +11,7 @@ public class PlayerControllerTest : MonoBehaviour
     [SerializeField] private float _jumpingPower = 16f;
 
     [SerializeField] private Transform _stageCenter;
-    [SerializeField] private bool _isFacingRight = true;
+    [SerializeField] private bool _frontIsRight = true;
 
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] private Transform _groundCheck;
@@ -45,12 +45,12 @@ public class PlayerControllerTest : MonoBehaviour
 
         if ( transform.position.x < _stageCenter.position.x) //Inte helt rätt man ska bara flippa när andra spelaren är bakom en
         {
-            _isFacingRight = true;
-            Flip(_isFacingRight);
+            _frontIsRight = true;
+            Flip(_frontIsRight);
         }
         else
         {
-            _isFacingRight = false;
+            _frontIsRight = false;
             Flip(false);
         }
         
@@ -68,11 +68,7 @@ public class PlayerControllerTest : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (IsGrounded())
-        {
-            //Can only move front and back when on ground, jumping is a set power.
-           // _rb.velocity = new Vector2(_horizontal * _groundSpeed, _rb.velocity.y);     
-        }
+       
        
         if(_rb.velocity == Vector2.zero)
         {
