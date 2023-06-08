@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerControllerTest : MonoBehaviour
 {
+    [SerializeField] private Animator _anim;
     [SerializeField] private int _playernNum;
     [SerializeField] public float _horizontal;
     [SerializeField] private float _groundSpeed = 6f;
@@ -16,22 +17,15 @@ public class PlayerControllerTest : MonoBehaviour
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] private Transform _groundCheck;
     [SerializeField] private LayerMask _groundLayer;
-    public bool idle;
     
     [Range(0,5)]
     [SerializeField] float _groundCheckRange;
 
     public bool isOnGround;
 
-    //private enum JumpDir
-    //{
-    //    up,
-    //    forward,
-    //    back,
-    //    noJump
-    //}
-    //JumpDir _jumpOption = JumpDir.noJump;
+    public bool idle;
 
+    [SerializeField] bool _isCrouching;
 
     // Start is called before the first frame update
     void Start()
@@ -68,7 +62,7 @@ public class PlayerControllerTest : MonoBehaviour
 
     private void FixedUpdate()
     {
-       
+        
        
         if(_rb.velocity == Vector2.zero)
         {
@@ -106,6 +100,15 @@ public class PlayerControllerTest : MonoBehaviour
         }
 
     }
+
+    public void Crouch(bool crouch)
+    {
+        _isCrouching = crouch;
+        _anim.SetBool("Crouching", crouch);
+        Debug.Log("Is crouching");
+    }
+
+
 
     private void Flip(bool right)
     {
