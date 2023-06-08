@@ -461,7 +461,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healthPoints: 100
   kbForce: 1.5
-  kbCounter: 0.2
+  kbCounter: 0
   kbTotalTime: 0
 --- !u!1 &1194720821
 GameObject:
@@ -717,7 +717,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healthPoints: 100
   kbForce: 1.5
-  kbCounter: 0.2
+  kbCounter: 0
   kbTotalTime: 0
 --- !u!1 &1285093590
 GameObject:
