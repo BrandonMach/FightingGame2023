@@ -35,4 +35,20 @@ MonoBehaviour:
       m_SpriteOverride: {fileID: 756296993, guid: 58e686f615384b540a4603dad1bf54ef, type: 3}
     m_FromMain: 1
     m_EntryOverrideCount: 1
+  - m_Name: High Kick
+    m_Hash: 942895454
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: blue atlas_14
+      m_Hash: 273214209
+      m_Sprite: {fileID: -2099887843, guid: e43460acf6313f746b5d49128f623c24, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: -223913193, guid: 58e686f615384b540a4603dad1bf54ef, type: 3}
+    - m_Name: blue atlas_15
+      m_Hash: 659544983
+      m_Sprite: {fileID: 873857865, guid: e43460acf6313f746b5d49128f623c24, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: -145510621, guid: 58e686f615384b540a4603dad1bf54ef, type: 3}
+    m_FromMain: 1
+    m_EntryOverrideCount: 2
   m_PrimaryLibraryGUID: 0a476c66d529b1541ad693767b6786b4
