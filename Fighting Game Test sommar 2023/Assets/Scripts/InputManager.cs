@@ -15,6 +15,9 @@ public class InputManager : MonoBehaviour
     [SerializeField] private PlayerControllerTest _pctScript;
 
 
+    [Header("HealthPoints")]
+    [SerializeField] PlayerHP _playerHPScript;
+
 
 
     private void Start()
@@ -25,59 +28,71 @@ public class InputManager : MonoBehaviour
     private void Update()
     {
      
-        //move
-        if (Input.GetKey(_forward) && _pctScript.IsGrounded())
-        {
-            _pctScript.idle =false;
-            _pctScript.Move(1);
-        }
-        if (Input.GetKey(_back) && _pctScript.IsGrounded())
-        {
-            _pctScript.idle = false;
-            _pctScript.Move(-1);
-        }
 
 
-        //Jumps
-        if (Input.GetKey(_forward) && _pctScript.IsGrounded())
+
+        if(_playerHPScript.kbCounter <= 0)
         {
-            if (Input.GetKeyDown(_jump))
+            //move
+            if (Input.GetKey(_forward) && _pctScript.IsGrounded())
             {
-                _pctScript.Jump("forward");
+                _pctScript.idle = false;
+                _pctScript.Move(1);
             }
-            
-        }
-        if (Input.GetKey(_back) && _pctScript.IsGrounded())
-        {
-            if (Input.GetKeyDown(_jump))
+            if (Input.GetKey(_back) && _pctScript.IsGrounded())
             {
-                _pctScript.Jump("back");
+                _pctScript.idle = false;
+                _pctScript.Move(-1);
             }
-        }
 
-        else if (Input.GetKeyDown(_jump) && _pctScript.IsGrounded())
-        {
-            
-            _pctScript.Jump("neutral");
-        }
 
-        //Crouching
+            //Jumps
+            if (Input.GetKey(_forward) && _pctScript.IsGrounded())
+            {
+                if (Input.GetKeyDown(_jump))
+                {
+                    _pctScript.Jump("forward");
+                }
 
-        if (Input.GetKey(_crouch))
-        {
-            _pctScript.Crouch(true);
+            }
+            if (Input.GetKey(_back) && _pctScript.IsGrounded())
+            {
+                if (Input.GetKeyDown(_jump))
+                {
+                    _pctScript.Jump("back");
+                }
+            }
+
+            else if (Input.GetKeyDown(_jump) && _pctScript.IsGrounded())
+            {
+
+                _pctScript.Jump("neutral");
+            }
+
+            //Crouching
+
+            if (Input.GetKey(_crouch))
+            {
+                _pctScript.Crouch(true);
+            }
+            else
+            {
+                _pctScript.Crouch(false);
+            }
+
+            //Kick
+
+            if (Input.GetKeyDown(_kick))
+            {
+                _pctScript.HighKick();
+            }
         }
         else
         {
-            _pctScript.Crouch(false);
+            _pctScript.KnockBack(_playerHPScript.kbForce);
+            _playerHPScript.kbCounter -= Time.deltaTime;
         }
-
-        //Kick
-
-        if (Input.GetKeyDown(_kick))
-        {
-            _pctScript.HighKick();
-        }
+        
         
     }
 }

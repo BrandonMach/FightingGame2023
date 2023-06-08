@@ -27,6 +27,12 @@ public class PlayerControllerTest : MonoBehaviour
 
     [SerializeField] bool _isCrouching;
 
+    [Header("Attacks")]
+    [SerializeField] private GameObject _kickHitBox;
+
+
+ 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -73,8 +79,7 @@ public class PlayerControllerTest : MonoBehaviour
     }
 
     public void Move(int dir)
-    {
-        
+    {    
         _rb.velocity = new Vector2(dir * _groundSpeed, _rb.velocity.y);
     }
 
@@ -105,12 +110,26 @@ public class PlayerControllerTest : MonoBehaviour
     {
         _isCrouching = crouch;
         _anim.SetBool("Crouching", crouch);
-        Debug.Log("Is crouching");
+        
     }
+
+
+    //Kick
     public void HighKick()
     {
         _anim.SetTrigger("High_Kick");
+       
     }
+    public void EnableKick()
+    {
+        _kickHitBox.SetActive(true);
+    }
+    public void DisableKick()
+    {
+        Debug.LogError("hello");
+        _kickHitBox.SetActive(false);
+    }
+
 
 
 
@@ -126,6 +145,19 @@ public class PlayerControllerTest : MonoBehaviour
             localScale.x = -1;       
         }
         transform.localScale = localScale;
+    }
+
+
+    public void KnockBack( float KBForce)
+    {
+        if (_frontIsRight)
+        {
+            _rb.velocity = new Vector2(-KBForce, KBForce);
+        }
+        else
+        {
+            _rb.velocity = new Vector2(KBForce, KBForce);
+        }
     }
 
     private void OnDrawGizmos()
