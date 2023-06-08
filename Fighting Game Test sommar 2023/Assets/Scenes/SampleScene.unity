@@ -627,7 +627,7 @@ MonoBehaviour:
   _jump: 119
   _crouch: 115
   _punch: 0
-  _kick: 0
+  _kick: 106
   _pctScript: {fileID: 1194720826}
 --- !u!95 &1194720828
 Animator:
@@ -662,8 +662,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed8b1ae4e4e52b34ea557c1c11e076fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CategoryHash: 0
-  m_labelHash: 0
+  m_CategoryHash: 0.000042782507
+  m_labelHash: 3.9624086e-29
   m_SpriteKey: 0.000000008726375
 --- !u!114 &1194720830
 MonoBehaviour:

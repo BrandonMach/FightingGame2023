@@ -107,6 +107,10 @@ public class PlayerControllerTest : MonoBehaviour
         _anim.SetBool("Crouching", crouch);
         Debug.Log("Is crouching");
     }
+    public void HighKick()
+    {
+        _anim.SetTrigger("High_Kick");
+    }
 
 
 

@@ -71,6 +71,13 @@ public class InputManager : MonoBehaviour
         {
             _pctScript.Crouch(false);
         }
+
+        //Kick
+
+        if (Input.GetKeyDown(_kick))
+        {
+            _pctScript.HighKick();
+        }
         
     }
 }
