@@ -17,6 +17,8 @@ public class PlayerControllerTest : MonoBehaviour
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] private Transform _groundCheck;
     [SerializeField] private LayerMask _groundLayer;
+
+    [SerializeField] private BoxCollider2D hurtbox;
     
     [Range(0,5)]
     [SerializeField] float _groundCheckRange;
@@ -37,12 +39,23 @@ public class PlayerControllerTest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+       
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if (_isCrouching)
+        {
+            hurtbox.offset = new Vector2(0,-0.25f );    
+            hurtbox.size = new Vector2(1.5f,2f);
+        }
+        else
+        {
+            hurtbox.offset = new Vector2(0, 0);
+            hurtbox.size = new Vector2(1.5f, 2.5f);
+        }
 
         if ( transform.position.x < _stageCenter.position.x) //Inte helt rätt man ska bara flippa när andra spelaren är bakom en
         {

@@ -490,6 +490,7 @@ MonoBehaviour:
   _groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  hurtbox: {fileID: 619662709}
   _groundCheckRange: 1.48
   isOnGround: 0
   idle: 0
@@ -520,7 +521,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.4666667, y: 2.4666667}
+  m_Size: {x: 1.5, y: 2.5}
   m_EdgeRadius: 0
 --- !u!50 &619662710
 Rigidbody2D:
@@ -875,7 +876,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.4666667, y: 2.4666667}
+  m_Size: {x: 1.5, y: 2.5}
   m_EdgeRadius: 0
 --- !u!114 &1194720826
 MonoBehaviour:
@@ -902,6 +903,7 @@ MonoBehaviour:
   _groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  hurtbox: {fileID: 1194720825}
   _groundCheckRange: 1.48
   isOnGround: 0
   idle: 0
