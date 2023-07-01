@@ -22,6 +22,7 @@ public class HitboxScript : MonoBehaviour
     {
         if (collision.IsTouchingLayers(7))
         {
+            
             collision.GetComponent<PlayerHP>().TakeDamage(10);
         }
     }

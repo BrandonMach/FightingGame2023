@@ -13,6 +13,7 @@ public class InputManager : MonoBehaviour
     [SerializeField] private KeyCode _kick;
 
     [SerializeField] private PlayerControllerTest _pctScript;
+    [SerializeField] private Attacks _attackScript;
 
 
     [Header("HealthPoints")]
@@ -80,11 +81,20 @@ public class InputManager : MonoBehaviour
                 _pctScript.Crouch(false);
             }
 
+
+            //Punch
+
+            if (Input.GetKeyDown(_punch))
+            {
+                _attackScript.Punch();
+            }
+
+
             //Kick
 
             if (Input.GetKeyDown(_kick))
             {
-                _pctScript.HighKick();
+                _attackScript.HighKick();
             }
         }
         else

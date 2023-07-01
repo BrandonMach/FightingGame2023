@@ -29,6 +29,7 @@ public class PlayerControllerTest : MonoBehaviour
 
     [Header("Attacks")]
     [SerializeField] private GameObject _kickHitBox;
+    [SerializeField] private GameObject _punchHitBox;
 
 
  
@@ -111,23 +112,6 @@ public class PlayerControllerTest : MonoBehaviour
         _isCrouching = crouch;
         _anim.SetBool("Crouching", crouch);
         
-    }
-
-
-    //Kick
-    public void HighKick()
-    {
-        _anim.SetTrigger("High_Kick");
-       
-    }
-    public void EnableKick()
-    {
-        _kickHitBox.SetActive(true);
-    }
-    public void DisableKick()
-    {
-        Debug.LogError("hello");
-        _kickHitBox.SetActive(false);
     }
 
 
