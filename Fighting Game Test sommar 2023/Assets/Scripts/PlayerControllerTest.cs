@@ -123,11 +123,8 @@ public class PlayerControllerTest : MonoBehaviour
     public void Crouch(bool crouch)
     {
         _isCrouching = crouch;
-        _anim.SetBool("Crouching", crouch);
-        
+        _anim.SetBool("Crouching", crouch);   
     }
-
-
 
 
     private void Flip(bool right)
@@ -160,7 +157,15 @@ public class PlayerControllerTest : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(new Vector3(_groundCheck.transform.position.x, _groundCheck.transform.position.y,0), _groundCheckRange);
-        
+        Gizmos.DrawWireSphere(new Vector3(_groundCheck.transform.position.x, _groundCheck.transform.position.y,0), _groundCheckRange);     
+    }
+
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player2") && !isOnGround)
+        {
+            Debug.LogError("apa");
+        }
     }
 }
