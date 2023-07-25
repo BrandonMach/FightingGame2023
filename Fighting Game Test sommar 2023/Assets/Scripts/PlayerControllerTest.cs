@@ -4,23 +4,31 @@ using UnityEngine;
 
 public class PlayerControllerTest : MonoBehaviour
 {
+    [Header("Animation")]
     [SerializeField] private Animator _anim;
-    [SerializeField] private int _playernNum;
+    
+
+    [Header("Movement properties")]
     [SerializeField] public float _horizontal;
     [SerializeField] private float _groundSpeed = 6f;
     [SerializeField] private float _airSpeed = 4f;
     [SerializeField] private float _jumpingPower = 16f;
+    [SerializeField] private BoxCollider2D _playerBoxCollider;
 
+    [Header("Character Flip")]
+    [SerializeField] private int _playernNum;
     [SerializeField] private Transform _stageCenter;
     [SerializeField] private bool _frontIsRight = true;
 
+
+    [Header("Ground Check")]
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] private Transform _groundCheck;
     [SerializeField] private LayerMask _groundLayer;
 
     [SerializeField] private BoxCollider2D hurtbox;
-    
-    [Range(0,5)]
+
+    [Range(0, 5)]
     [SerializeField] float _groundCheckRange;
 
     public bool isOnGround;
@@ -29,17 +37,23 @@ public class PlayerControllerTest : MonoBehaviour
 
     [SerializeField] bool _isCrouching;
 
-    [Header("Attacks")]
-    [SerializeField] private GameObject _kickHitBox;
-    [SerializeField] private GameObject _punchHitBox;
+    [Header("Opponent")]
 
-
+    [SerializeField] private GameObject _opponent;
+    private PlayerControllerTest _opponentsPCT;
  
 
     // Start is called before the first frame update
     void Start()
     {
-       
+        foreach (GameObject character in GameManager.playerArray)
+        {
+            if(character.gameObject != this.gameObject)
+            {
+                _opponent = character;
+            }
+        }
+        _opponentsPCT = _opponent.GetComponent<PlayerControllerTest>();
     }
 
     // Update is called once per frame
@@ -67,12 +81,14 @@ public class PlayerControllerTest : MonoBehaviour
             _frontIsRight = false;
             Flip(false);
         }
-        
+
+        // if playerNum is 1 Use Horisontal inputs for Player 1
         if(_playernNum == 1)
         {
             _horizontal = Input.GetAxisRaw("Horizontal");
         }
-        else if(_playernNum ==2)
+        // if playerNum is 2 Use Horisontal inputs for Player 2
+        else if (_playernNum ==2)
         {
             _horizontal = Input.GetAxisRaw("Horizontal_P2");
         }
@@ -81,15 +97,11 @@ public class PlayerControllerTest : MonoBehaviour
     }
 
     private void FixedUpdate()
-    {
-        
-       
+    {  
         if(_rb.velocity == Vector2.zero)
         {
             idle = true;
-        }
-        
-        
+        }    
     }
 
     public void Move(int dir)
@@ -161,11 +173,13 @@ public class PlayerControllerTest : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D colliderObject)
     {
-        if (collision.gameObject.CompareTag("Player2") && !isOnGround)
+        if (colliderObject.gameObject == _opponent && !isOnGround)
         {
-            Debug.LogError("apa");
+            Physics2D.IgnoreCollision(colliderObject.collider, _playerBoxCollider);
+            Debug.LogError("Collide");
+            
         }
     }
 }

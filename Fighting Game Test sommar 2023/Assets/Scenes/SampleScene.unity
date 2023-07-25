@@ -212,7 +212,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!251 &516274801
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -243,7 +243,7 @@ BoxCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 1
+  m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
@@ -609,11 +609,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _anim: {fileID: 619662711}
-  _playernNum: 2
   _horizontal: 0
   _groundSpeed: 3
   _airSpeed: 5
   _jumpingPower: 7.5
+  _playerBoxCollider: {fileID: 619662709}
+  _playernNum: 2
   _stageCenter: {fileID: 1194720823}
   _frontIsRight: 1
   _rb: {fileID: 619662710}
@@ -626,8 +627,7 @@ MonoBehaviour:
   isOnGround: 0
   idle: 0
   _isCrouching: 0
-  _kickHitBox: {fileID: 0}
-  _punchHitBox: {fileID: 0}
+  _opponent: {fileID: 0}
 --- !u!61 &619662709
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -785,9 +785,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e3751d11a3cac2488ea759a0e82db7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerArray:
-  - {fileID: 1194720821}
-  - {fileID: 619662704}
 --- !u!4 &805498860
 Transform:
   m_ObjectHideFlags: 0
@@ -1069,11 +1066,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _anim: {fileID: 1194720828}
-  _playernNum: 1
   _horizontal: 0
   _groundSpeed: 3
   _airSpeed: 2.5
   _jumpingPower: 7.5
+  _playerBoxCollider: {fileID: 1194720825}
+  _playernNum: 1
   _stageCenter: {fileID: 619662706}
   _frontIsRight: 1
   _rb: {fileID: 1194720824}
@@ -1086,8 +1084,7 @@ MonoBehaviour:
   isOnGround: 0
   idle: 0
   _isCrouching: 0
-  _kickHitBox: {fileID: 1285093590}
-  _punchHitBox: {fileID: 562663732}
+  _opponent: {fileID: 0}
 --- !u!114 &1194720827
 MonoBehaviour:
   m_ObjectHideFlags: 0

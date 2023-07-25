@@ -5,13 +5,13 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 
-    [SerializeField] private GameObject[] _playerArray;
+    [SerializeField] public static GameObject[] playerArray;
 
 
 
     void Start()
     {
-        _playerArray = GameObject.FindGameObjectsWithTag("Player");
+        playerArray = GameObject.FindGameObjectsWithTag("Player");
     }
 
     // Update is called once per frame
