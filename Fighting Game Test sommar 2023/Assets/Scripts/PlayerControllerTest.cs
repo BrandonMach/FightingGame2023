@@ -175,11 +175,23 @@ public class PlayerControllerTest : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D colliderObject)
     {
-        if (colliderObject.gameObject == _opponent && !isOnGround)
+        if (isOnGround)
+        {
+            Physics2D.IgnoreCollision(colliderObject.collider, _playerBoxCollider, false);
+            Debug.LogError("Collide");
+        }
+        else
         {
             Physics2D.IgnoreCollision(colliderObject.collider, _playerBoxCollider);
-            Debug.LogError("Collide");
             
         }
+
+
+        //if (colliderObject.gameObject == _opponent && !isOnGround)
+        //{
+        //    Physics2D.IgnoreCollision(colliderObject.collider, _playerBoxCollider);
+        //    Debug.LogError("Collide");   
+        //}
+        
     }
 }
