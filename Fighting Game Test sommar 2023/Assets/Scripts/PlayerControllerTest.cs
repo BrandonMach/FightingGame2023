@@ -175,16 +175,39 @@ public class PlayerControllerTest : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D colliderObject)
     {
-        if (isOnGround)
+
+        //if (colliderObject.gameObject.tag == "Wall")
+        //{
+        //    Physics2D.IgnoreCollision(colliderObject.collider, _playerBoxCollider, false);
+        //    Debug.LogError("Wall collide");
+        //}
+
+        //if (isOnGround && colliderObject.gameObject.tag =="Player")
+        //{
+        //    Physics2D.IgnoreCollision(colliderObject.collider, _playerBoxCollider, false);
+        //    Debug.LogError("Player Collide");
+        //}
+        //if (!isOnGround )
+        //{
+        //    if(colliderObject.gameObject.tag == "Player")
+        //    {
+
+        //    }
+        //    Debug.LogError("Air Collide");
+        //    Physics2D.IgnoreCollision(colliderObject.collider, _playerBoxCollider, true);
+        //}
+
+        if (colliderObject.gameObject.tag == "Player")
         {
-            Physics2D.IgnoreCollision(colliderObject.collider, _playerBoxCollider, false);
-            Debug.LogError("Collide");
+            Debug.LogError("Air Collide");
+            Physics2D.IgnoreCollision(colliderObject.collider, _playerBoxCollider, true);
         }
-        else
-        {
-            Physics2D.IgnoreCollision(colliderObject.collider, _playerBoxCollider);
-            
-        }
+       
+        //else if(!isOnGround && colliderObject.gameObject.tag == "Player")
+        //{
+        //    Debug.Log("intangable");
+        //    Physics2D.IgnoreCollision(colliderObject.collider, _playerBoxCollider);      
+        //}
 
 
         //if (colliderObject.gameObject == _opponent && !isOnGround)
@@ -192,6 +215,6 @@ public class PlayerControllerTest : MonoBehaviour
         //    Physics2D.IgnoreCollision(colliderObject.collider, _playerBoxCollider);
         //    Debug.LogError("Collide");   
         //}
-        
+
     }
 }
