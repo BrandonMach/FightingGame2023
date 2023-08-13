@@ -534,6 +534,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afa5917cd16267147b95807749ba6aed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Player1: 0
   _anim: {fileID: 428588301}
   _horizontal: 0
   _groundSpeed: 3
@@ -1802,7 +1803,7 @@ GameObject:
   - component: {fileID: 1654664831}
   - component: {fileID: 1654664832}
   m_Layer: 5
-  m_Name: Right HP bar
+  m_Name: Player 1 HP bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2045,7 +2046,7 @@ GameObject:
   - component: {fileID: 2124865924}
   - component: {fileID: 2124865925}
   m_Layer: 5
-  m_Name: Left HP bar
+  m_Name: Player 2 HP bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
