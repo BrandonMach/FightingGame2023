@@ -23,7 +23,24 @@ public class InputManager : MonoBehaviour
 
     private void Start()
     {
-        
+        if (_pctScript.Player1)
+        {
+            _forward = KeyCode.D;
+            _back = KeyCode.A;
+            _jump = KeyCode.W;
+            _crouch = KeyCode.S;
+            _punch = KeyCode.G;
+            _kick = KeyCode.H;
+        }
+        else 
+        {
+            _forward = KeyCode.RightArrow;
+            _back = KeyCode.LeftArrow;
+            _jump = KeyCode.UpArrow;
+            _crouch = KeyCode.DownArrow;
+            _punch = KeyCode.K;
+            _kick = KeyCode.L;
+        }
     }
 
     private void Update()

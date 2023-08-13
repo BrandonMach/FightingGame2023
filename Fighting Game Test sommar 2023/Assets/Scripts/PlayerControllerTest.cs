@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerControllerTest : MonoBehaviour
 {
+    [HideInInspector] public bool Player1 = false;
+
     [Header("Animation")]
     [SerializeField] private Animator _anim;
     
