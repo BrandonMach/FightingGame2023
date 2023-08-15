@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public  Slider[] playerHealthBars;
 
 
+
     void Start()
     {
         playerArray = GameObject.FindGameObjectsWithTag("Player");
@@ -37,7 +38,8 @@ public class GameManager : MonoBehaviour
             playerNumberAssign++;
         }
 
-      
+        playerHealthBars[0].value = playerArray[0].GetComponent<PlayerHP>().healthPoints;
+        playerHealthBars[1].value = playerArray[1].GetComponent<PlayerHP>().healthPoints;
 
 
     }
@@ -45,6 +47,11 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-     
+
+        playerHealthBars[0].value = playerArray[0].GetComponent<PlayerHP>().healthPoints;
+        playerHealthBars[1].value = playerArray[1].GetComponent<PlayerHP>().healthPoints;
+
+
+
     }
 }

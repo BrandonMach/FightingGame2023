@@ -385,7 +385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca18f8bc086968b49bf61a7059d25fef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthPoints: 100
+  healthPoints: 0
   kbForce: 1.5
   kbCounter: 0
   kbTotalTime: 0
@@ -1151,7 +1151,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e3751d11a3cac2488ea759a0e82db7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHealthBars: []
+  playerHealthBars:
+  - {fileID: 1654664832}
+  - {fileID: 2124865925}
 --- !u!4 &805498860
 Transform:
   m_ObjectHideFlags: 0
@@ -1804,7 +1806,7 @@ GameObject:
   - component: {fileID: 1654664832}
   m_Layer: 5
   m_Name: Player 1 HP bar
-  m_TagString: Untagged
+  m_TagString: HealthBar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1877,9 +1879,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 1
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 100
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2047,7 +2049,7 @@ GameObject:
   - component: {fileID: 2124865925}
   m_Layer: 5
   m_Name: Player 2 HP bar
-  m_TagString: Untagged
+  m_TagString: HealthBar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2120,9 +2122,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 1
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 100
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2253,6 +2255,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player2
       objectReference: {fileID: 0}
+    - target: {fileID: 4189577241436604573, guid: 85d1f249323fd98418cc4506fb86c82f, type: 3}
+      propertyPath: healthPoints
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85d1f249323fd98418cc4506fb86c82f, type: 3}
 --- !u!1001 &8787168543373760809
@@ -2266,6 +2272,10 @@ PrefabInstance:
       propertyPath: _stageCenter
       value: 
       objectReference: {fileID: 619662706}
+    - target: {fileID: 8787168542386710294, guid: e90d1ecd22933554ab9e43562dc1ae3e, type: 3}
+      propertyPath: healthPoints
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 8787168542386710300, guid: e90d1ecd22933554ab9e43562dc1ae3e, type: 3}
       propertyPath: m_Name
       value: Player1
