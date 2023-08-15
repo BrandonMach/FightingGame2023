@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerHP : MonoBehaviour
 {
-    // Start is called before the first frame update
-
+    
+    //Om olika karaktärer ska ha olika mycket hp
     [SerializeField] public int healthPoints;
 
 

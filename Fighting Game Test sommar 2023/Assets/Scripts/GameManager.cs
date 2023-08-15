@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 [System.Serializable]
 public class GameManager : MonoBehaviour
@@ -13,8 +14,13 @@ public class GameManager : MonoBehaviour
     private Vector2 spawnPositionsP2; 
 
     [SerializeField] public static GameObject[] playerArray;
-    [SerializeField] public  Slider[] playerHealthBars;
 
+
+
+
+    [Header("HealthPoints")]
+    [SerializeField] private  Slider[] _playerHealthBars;
+    [SerializeField] private TextMeshProUGUI[] _hpText;
 
 
     void Start()
@@ -38,8 +44,8 @@ public class GameManager : MonoBehaviour
             playerNumberAssign++;
         }
 
-        playerHealthBars[0].value = playerArray[0].GetComponent<PlayerHP>().healthPoints;
-        playerHealthBars[1].value = playerArray[1].GetComponent<PlayerHP>().healthPoints;
+        _playerHealthBars[0].value = playerArray[0].GetComponent<PlayerHP>().healthPoints;
+        _playerHealthBars[1].value = playerArray[1].GetComponent<PlayerHP>().healthPoints;
 
 
     }
@@ -47,10 +53,12 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Kolla vilken sida texten ska vara
+        _playerHealthBars[0].value = playerArray[0].GetComponent<PlayerHP>().healthPoints;
+        _hpText[0].text = "100" + " / " + _playerHealthBars[0].value;
 
-        playerHealthBars[0].value = playerArray[0].GetComponent<PlayerHP>().healthPoints;
-        playerHealthBars[1].value = playerArray[1].GetComponent<PlayerHP>().healthPoints;
-
+        _playerHealthBars[1].value = playerArray[1].GetComponent<PlayerHP>().healthPoints;
+        _hpText[1].text = _playerHealthBars[1].value + " / " + "100";
 
 
     }
