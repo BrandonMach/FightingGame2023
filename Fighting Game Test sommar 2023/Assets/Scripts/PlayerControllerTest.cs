@@ -43,9 +43,10 @@ public class PlayerControllerTest : MonoBehaviour
 
     [SerializeField] private GameObject _opponent;
     private PlayerControllerTest _opponentsPCT;
- 
 
-    // Start is called before the first frame update
+    [Header("Rounds_Indicator")]
+    public bool round1Won;
+    
     void Start()
     {
         foreach (GameObject character in GameManager.playerArray)
@@ -56,6 +57,8 @@ public class PlayerControllerTest : MonoBehaviour
             }
         }
         _opponentsPCT = _opponent.GetComponent<PlayerControllerTest>();
+
+        AssignControls();
     }
 
     // Update is called once per frame
@@ -82,17 +85,6 @@ public class PlayerControllerTest : MonoBehaviour
         {
             _frontIsRight = false;
             Flip(false);
-        }
-
-        // if playerNum is 1 Use Horisontal inputs for Player 1
-        if(_playernNum == 1)
-        {
-            _horizontal = Input.GetAxisRaw("Horizontal");
-        }
-        // if playerNum is 2 Use Horisontal inputs for Player 2
-        else if (_playernNum ==2)
-        {
-            _horizontal = Input.GetAxisRaw("Horizontal_P2");
         }
        
         isOnGround = IsGrounded();
@@ -165,6 +157,21 @@ public class PlayerControllerTest : MonoBehaviour
         else
         {
             _rb.velocity = new Vector2(KBForce, KBForce);
+        }
+    }
+
+
+    void AssignControls()
+    {
+        // if playerNum is 1 Use Horisontal inputs for Player 1
+        if (_playernNum == 1)
+        {
+            _horizontal = Input.GetAxisRaw("Horizontal");
+        }
+        // if playerNum is 2 Use Horisontal inputs for Player 2
+        else if (_playernNum == 2)
+        {
+            _horizontal = Input.GetAxisRaw("Horizontal_P2");
         }
     }
 

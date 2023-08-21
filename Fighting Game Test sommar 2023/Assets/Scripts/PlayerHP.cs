@@ -34,4 +34,9 @@ public class PlayerHP : MonoBehaviour
         kbCounter = 0.2f;
         healthPoints -= damageAmount;   
     }
+
+    public void ResetHP()
+    {
+        healthPoints = 100;
+    }
 }
