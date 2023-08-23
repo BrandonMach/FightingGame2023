@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI[] _hpText;
 
     [Header("Rounds")]
+    [SerializeField] private float _roundTimer = 99;
+    [SerializeField] private TextMeshProUGUI _clockText;
     [SerializeField] private roundIndicatorScript _roundScript;
     [SerializeField] private Image[] _p1RoundIndicator;
     [SerializeField] private Image[] _p2RoundIndicator;
@@ -64,6 +66,10 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        _roundTimer -= Time.deltaTime;
+        _roundTimer = Mathf.Clamp(_roundTimer, 0, 99);
+
+        _clockText.text = ((int)Mathf.Round(_roundTimer)).ToString();
         UpdateHealthBar();
         CheckNormalKO();
         
@@ -130,7 +136,7 @@ public class GameManager : MonoBehaviour
         {
             player.GetComponent<PlayerHP>().ResetHP();
         }
-
+        _roundTimer = 99;
         playerArray[0].transform.position = spawnPositionsP1;
         playerArray[1].transform.position = spawnPositionsP2;
     }
