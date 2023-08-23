@@ -23,6 +23,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private  Slider[] _playerHealthBars;
     [SerializeField] private TextMeshProUGUI[] _hpText;
 
+    [Header("Rounds")]
+    [SerializeField] private roundIndicatorScript _roundScript;
+    [SerializeField] private Image[] _p1RoundIndicator;
+    [SerializeField] private Image[] _p2RoundIndicator;
+
+
     [Header("GameSplashArt")]
     [SerializeField] private GameObject _gameSplashScreen;
 
@@ -55,36 +61,43 @@ public class GameManager : MonoBehaviour
 
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        //Kolla vilken sida texten ska vara
+        UpdateHealthBar();
+        CheckNormalKO();
+        
+    }
+
+    void UpdateHealthBar()
+    {
         _playerHealthBars[0].value = playerArray[0].GetComponent<PlayerHP>().healthPoints;
         _hpText[0].text = "100" + " / " + _playerHealthBars[0].value;
 
         _playerHealthBars[1].value = playerArray[1].GetComponent<PlayerHP>().healthPoints;
         _hpText[1].text = _playerHealthBars[1].value + " / " + "100";
+    }
 
+    void CheckNormalKO()
+    {
         for (int i = 0; i < _playerHealthBars.Length; i++)
         {
-            if (_playerHealthBars[i].value <= 0 )//If player has won 1 round already
+            if (_playerHealthBars[i].value <= 0)//If player has won 1 round already
             {
-                GiveRoundPoint(i);
-
-                
+                GiveRoundPoint(i, "NormalKO");
             }
 
         }
-        
     }
 
-    void GiveRoundPoint(int playerLostIndex)
+    void GiveRoundPoint(int playerLostIndex, string KOType)
     {
 
-        if(playerLostIndex == 0)
+        if(playerLostIndex == 0)//Player 1 Lost
         {
             if(!playerArray[1].GetComponent<PlayerControllerTest>().round1Won)
             {
+                _p2RoundIndicator[0].color = _roundScript.koType[KOType];
                 ResetRound();
                 playerArray[1].GetComponent<PlayerControllerTest>().round1Won = true;
             }
@@ -93,10 +106,11 @@ public class GameManager : MonoBehaviour
                 GameSet();
             }
         }
-        if(playerLostIndex == 1)
+        if(playerLostIndex == 1)//Player 2 Lost
         {
             if(!playerArray[0].GetComponent<PlayerControllerTest>().round1Won)
             {
+                _p1RoundIndicator[0].color = _roundScript.koType[KOType];
                 ResetRound();
                 playerArray[0].GetComponent<PlayerControllerTest>().round1Won = true;
             }

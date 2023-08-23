@@ -631,6 +631,7 @@ MonoBehaviour:
   idle: 0
   _isCrouching: 0
   _opponent: {fileID: 0}
+  round1Won: 0
 --- !u!212 &428588307
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1344,6 +1345,7 @@ GameObject:
   m_Component:
   - component: {fileID: 805498860}
   - component: {fileID: 805498859}
+  - component: {fileID: 805498861}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1369,6 +1371,13 @@ MonoBehaviour:
   _hpText:
   - {fileID: 2065883495}
   - {fileID: 559310397}
+  _roundScript: {fileID: 805498861}
+  _p1RoundIndicator:
+  - {fileID: 1028815140}
+  - {fileID: 1737995081}
+  _p2RoundIndicator:
+  - {fileID: 2000788829}
+  - {fileID: 1943353696}
   _gameSplashScreen: {fileID: 77300933}
 --- !u!4 &805498860
 Transform:
@@ -1385,6 +1394,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &805498861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805498858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eea62db8037b414e9fdd1f64e2dfebf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _indicateColor:
+  - {r: 0.80392164, g: 0.6666667, b: 0.20784315, a: 1}
+  - {r: 0.25490198, g: 0.078431375, b: 0.3254902, a: 1}
+  - {r: 0, g: 0.48627454, b: 0.48627454, a: 1}
 --- !u!1 &846072699
 GameObject:
   m_ObjectHideFlags: 0
