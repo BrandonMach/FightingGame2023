@@ -15,7 +15,8 @@ public class GameManager : MonoBehaviour
     private Vector2 spawnPositionsP2; 
 
     [SerializeField] public static GameObject[] playerArray;
-
+    private int player1 = 0;
+    private int player2 = 1;
 
 
 
@@ -23,16 +24,23 @@ public class GameManager : MonoBehaviour
     [SerializeField] private  Slider[] _playerHealthBars;
     [SerializeField] private TextMeshProUGUI[] _hpText;
 
-    [Header("Rounds")]
+    [Header("Timer")]
     [SerializeField] private float _roundTimer = 99;
     [SerializeField] private TextMeshProUGUI _clockText;
+    
+
+    [Header("Rounds")]
     [SerializeField] private roundIndicatorScript _roundScript;
     [SerializeField] private Image[] _p1RoundIndicator;
     [SerializeField] private Image[] _p2RoundIndicator;
+    bool _roundsOver = false;
 
 
-    [Header("GameSplashArt")]
+    [Header("KOSplashArt")]
     [SerializeField] private GameObject _gameSplashScreen;
+    [SerializeField] private GameObject _perfectSplashScreen;
+    [SerializeField] private GameObject _timeSplashScreen;
+    [SerializeField] private GameObject _koSplashScreen;
 
 
     void Start()
@@ -43,9 +51,9 @@ public class GameManager : MonoBehaviour
         spawnPositionsP1 = new Vector2(-spawnXAxel, spawnYAxel);
         spawnPositionsP2 = new Vector2(spawnXAxel, spawnYAxel);
 
-        playerArray[0].transform.position = spawnPositionsP1;
-        playerArray[0].GetComponent<PlayerControllerTest>().Player1 = true;
-        playerArray[1].transform.position = spawnPositionsP2;
+        playerArray[player1].transform.position = spawnPositionsP1;
+        playerArray[player1].GetComponent<PlayerControllerTest>().Player1 = true;
+        playerArray[player2].transform.position = spawnPositionsP2;
 
 
         int playerNumberAssign = 1;
@@ -56,11 +64,15 @@ public class GameManager : MonoBehaviour
             playerNumberAssign++;
         }
 
-        _playerHealthBars[0].value = playerArray[0].GetComponent<PlayerHP>().healthPoints;
-        _playerHealthBars[1].value = playerArray[1].GetComponent<PlayerHP>().healthPoints;
+        _playerHealthBars[player1].value = playerArray[player1].GetComponent<PlayerHP>().healthPoints;
+        _playerHealthBars[player2].value = playerArray[player2].GetComponent<PlayerHP>().healthPoints;
 
+
+        //SplashScreen
         _gameSplashScreen.SetActive(false);
-
+        _perfectSplashScreen.SetActive(false);
+        _timeSplashScreen.SetActive(false);
+        _koSplashScreen.SetActive(false);
     }
 
 
@@ -70,63 +82,121 @@ public class GameManager : MonoBehaviour
         _roundTimer = Mathf.Clamp(_roundTimer, 0, 99);
 
         _clockText.text = ((int)Mathf.Round(_roundTimer)).ToString();
-        UpdateHealthBar();
+
+        UpdateHealthBars();
+        CheckTimeKO();
         CheckNormalKO();
         
     }
 
-    void UpdateHealthBar()
+    void CheckTimeKO()
     {
-        _playerHealthBars[0].value = playerArray[0].GetComponent<PlayerHP>().healthPoints;
-        _hpText[0].text = "100" + " / " + _playerHealthBars[0].value;
+        if (_roundTimer <= 0)
+        {
+            _timeSplashScreen.SetActive(true);
 
-        _playerHealthBars[1].value = playerArray[1].GetComponent<PlayerHP>().healthPoints;
-        _hpText[1].text = _playerHealthBars[1].value + " / " + "100";
+            if (_playerHealthBars[player1].value == _playerHealthBars[player2].value)
+            {
+                Debug.LogError("Timeout TIE!!!");
+            }
+            else if (_playerHealthBars[player1].value > _playerHealthBars[player2].value) //Player 1 more HP
+            {
+                GiveRoundPoint(1, "TimeKO");
+            }
+            else
+            {
+                GiveRoundPoint(0, "TimeKO");
+            }
+        }
+    }
+
+    void UpdateHealthBars()
+    {
+        _playerHealthBars[player1].value = playerArray[player1].GetComponent<PlayerHP>().healthPoints;
+        _hpText[player1].text = "100" + " / " + _playerHealthBars[player1].value;
+
+        _playerHealthBars[player2].value = playerArray[player2].GetComponent<PlayerHP>().healthPoints;
+        _hpText[player2].text = _playerHealthBars[player2].value + " / " + "100";
     }
 
     void CheckNormalKO()
     {
         for (int i = 0; i < _playerHealthBars.Length; i++)
         {
-            if (_playerHealthBars[i].value <= 0)//If player has won 1 round already
+            if (_playerHealthBars[i].value <= 0 && !_roundsOver)//If player has won 1 round already
             {
+                _roundsOver = true;
+
                 GiveRoundPoint(i, "NormalKO");
             }
 
         }
     }
 
-    void GiveRoundPoint(int playerLostIndex, string KOType)
+    void GiveRoundPoint(int playerLostIndex, string KOType) 
     {
-
-        if(playerLostIndex == 0)//Player 1 Lost
+        if(playerLostIndex == player1)//Player 1 Lost
         {
-            if(!playerArray[1].GetComponent<PlayerControllerTest>().round1Won)
+            int player2RoundsWon = playerArray[player2].GetComponent<PlayerControllerTest>().roundsWon;
+
+            if (player2RoundsWon==0)
             {
-                _p2RoundIndicator[0].color = _roundScript.koType[KOType];
-                ResetRound();
-                playerArray[1].GetComponent<PlayerControllerTest>().round1Won = true;
+                _p2RoundIndicator[player2RoundsWon].color = _roundScript.koType[CheckPerfectKO(_playerHealthBars[1].value)];//Check Player 2 HP
             }
-            else
+
+            if (player2RoundsWon == 1)
             {
-                GameSet();
+                _p2RoundIndicator[player2RoundsWon].color = _roundScript.koType[CheckPerfectKO(_playerHealthBars[player2].value)]; //Check Player 2 HP
             }
+
+            playerArray[player2].GetComponent<PlayerControllerTest>().roundsWon++; //Give Player 2 a round point
+
         }
-        if(playerLostIndex == 1)//Player 2 Lost
+        if(playerLostIndex == player2)//Player 2 Lost
         {
-            if(!playerArray[0].GetComponent<PlayerControllerTest>().round1Won)
-            {
-                _p1RoundIndicator[0].color = _roundScript.koType[KOType];
-                ResetRound();
-                playerArray[0].GetComponent<PlayerControllerTest>().round1Won = true;
+            int player1RoundsWon = playerArray[player1].GetComponent<PlayerControllerTest>().roundsWon;
+
+            if (player1RoundsWon == 1)
+            {  
+                _p1RoundIndicator[player1RoundsWon].color = _roundScript.koType[CheckPerfectKO(_playerHealthBars[player1].value)];//Check Player 2 HP 
             }
-            else
+            else if (player1RoundsWon == 0)
             {
-                GameSet();
+                _p1RoundIndicator[player1RoundsWon].color = _roundScript.koType[CheckPerfectKO(_playerHealthBars[player1].value)];//Check Player 2 HP
             }
+
+            playerArray[player1].GetComponent<PlayerControllerTest>().roundsWon++; //Give Player 2 a round point
         }
 
-       
+        StartCoroutine(WaitRestartRound());
+
+        //if (playerLostIndex == 0 && playerArray[1].GetComponent<PlayerControllerTest>().round1Won || playerLostIndex == 1 && playerArray[0].GetComponent<PlayerControllerTest>().round1Won)
+        //{
+        //    GameSet();
+        //}
+    }
+    /// <summary>
+    /// int playerLostIndex = Player that lost the round, string KOType = The KO type
+    /// </summary>
+   
+    string CheckPerfectKO(float winnerHP)
+    {
+        if (winnerHP == 100)
+        {
+           _perfectSplashScreen.SetActive(true);
+           return "PerfectKO";
+        }
+        else
+        {
+            _koSplashScreen.SetActive(true);
+            return "NormalKO";
+        }
+    }
+
+    private IEnumerator WaitRestartRound()
+    {
+        yield return new WaitForSeconds(5);
+        ResetRound();
     }
 
     private void ResetRound()
@@ -136,9 +206,13 @@ public class GameManager : MonoBehaviour
         {
             player.GetComponent<PlayerHP>().ResetHP();
         }
+        _koSplashScreen.SetActive(false);
+        _perfectSplashScreen.SetActive(false);
+        _timeSplashScreen.SetActive(false);
         _roundTimer = 99;
-        playerArray[0].transform.position = spawnPositionsP1;
-        playerArray[1].transform.position = spawnPositionsP2;
+        playerArray[player1].transform.position = spawnPositionsP1;
+        playerArray[player2].transform.position = spawnPositionsP2;
+        _roundsOver = false;
     }
 
     void GameSet()

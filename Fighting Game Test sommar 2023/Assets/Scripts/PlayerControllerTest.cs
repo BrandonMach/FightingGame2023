@@ -45,7 +45,7 @@ public class PlayerControllerTest : MonoBehaviour
     private PlayerControllerTest _opponentsPCT;
 
     [Header("Rounds_Indicator")]
-    public bool round1Won;
+    public int roundsWon;
     
     void Start()
     {
