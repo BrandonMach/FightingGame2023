@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Image[] _p1RoundIndicator;
     [SerializeField] private Image[] _p2RoundIndicator;
     bool _roundsOver = false;
+    bool _GAME= false;
 
 
     [Header("KOSplashArt")]
@@ -82,6 +83,9 @@ public class GameManager : MonoBehaviour
         _roundTimer = Mathf.Clamp(_roundTimer, 0, 99);
 
         _clockText.text = ((int)Mathf.Round(_roundTimer)).ToString();
+
+
+      
 
         UpdateHealthBars();
         CheckTimeKO();
@@ -139,7 +143,7 @@ public class GameManager : MonoBehaviour
         {
             int player2RoundsWon = playerArray[player2].GetComponent<PlayerControllerTest>().roundsWon;
 
-            _p2RoundIndicator[player2RoundsWon].color = _roundScript.koType[CheckPerfectKO(_playerHealthBars[player2].value)]; //Check Player 2 HP
+            _p2RoundIndicator[player2RoundsWon].color = _roundScript.koType[CheckPerfectKO(_playerHealthBars[player2].value, player2RoundsWon)]; //Check Player 2 HP
             playerArray[player2].GetComponent<PlayerControllerTest>().roundsWon++; //Give Player 2 a round point
 
         }
@@ -147,33 +151,34 @@ public class GameManager : MonoBehaviour
         {
             int player1RoundsWon = playerArray[player1].GetComponent<PlayerControllerTest>().roundsWon;
 
-            _p1RoundIndicator[player1RoundsWon].color = _roundScript.koType[CheckPerfectKO(_playerHealthBars[player1].value)];//Check Player 1 HP 
+            _p1RoundIndicator[player1RoundsWon].color = _roundScript.koType[CheckPerfectKO(_playerHealthBars[player1].value, player1RoundsWon)];//Check Player 1 HP 
             playerArray[player1].GetComponent<PlayerControllerTest>().roundsWon++; //Give Player 2 a round point
         }
 
         StartCoroutine(WaitRestartRound());
-
-        //if (playerLostIndex == 0 && playerArray[1].GetComponent<PlayerControllerTest>().round1Won || playerLostIndex == 1 && playerArray[0].GetComponent<PlayerControllerTest>().round1Won)
-        //{
-        //    GameSet();
-        //}
     }
     /// <summary>
     /// int playerLostIndex = Player that lost the round, string KOType = The KO type
     /// </summary>
    
-    string CheckPerfectKO(float winnerHP)
+    string CheckPerfectKO(float winnerHP, int round)
     {
-        if (winnerHP == 100)
+        if (round == 0 && winnerHP > 100)
         {
-           _perfectSplashScreen.SetActive(true);
-           return "PerfectKO";
+            _perfectSplashScreen.SetActive(true);
+            return "NormalKO";
+        }
+        if (round == 0 && winnerHP == 100)
+        {
+            _perfectSplashScreen.SetActive(true);
+            return "PerfectKO";
         }
         else
         {
-            _koSplashScreen.SetActive(true);
-            return "NormalKO";
+            GameSet();
+            return null;
         }
+
     }
 
     private IEnumerator WaitRestartRound()
@@ -181,6 +186,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(5);
         ResetRound();
     }
+    
 
     private void ResetRound()
     {
