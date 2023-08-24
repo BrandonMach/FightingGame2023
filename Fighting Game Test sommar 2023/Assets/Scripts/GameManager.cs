@@ -139,16 +139,7 @@ public class GameManager : MonoBehaviour
         {
             int player2RoundsWon = playerArray[player2].GetComponent<PlayerControllerTest>().roundsWon;
 
-            if (player2RoundsWon==0)
-            {
-                _p2RoundIndicator[player2RoundsWon].color = _roundScript.koType[CheckPerfectKO(_playerHealthBars[1].value)];//Check Player 2 HP
-            }
-
-            if (player2RoundsWon == 1)
-            {
-                _p2RoundIndicator[player2RoundsWon].color = _roundScript.koType[CheckPerfectKO(_playerHealthBars[player2].value)]; //Check Player 2 HP
-            }
-
+            _p2RoundIndicator[player2RoundsWon].color = _roundScript.koType[CheckPerfectKO(_playerHealthBars[player2].value)]; //Check Player 2 HP
             playerArray[player2].GetComponent<PlayerControllerTest>().roundsWon++; //Give Player 2 a round point
 
         }
@@ -156,15 +147,7 @@ public class GameManager : MonoBehaviour
         {
             int player1RoundsWon = playerArray[player1].GetComponent<PlayerControllerTest>().roundsWon;
 
-            if (player1RoundsWon == 1)
-            {  
-                _p1RoundIndicator[player1RoundsWon].color = _roundScript.koType[CheckPerfectKO(_playerHealthBars[player1].value)];//Check Player 2 HP 
-            }
-            else if (player1RoundsWon == 0)
-            {
-                _p1RoundIndicator[player1RoundsWon].color = _roundScript.koType[CheckPerfectKO(_playerHealthBars[player1].value)];//Check Player 2 HP
-            }
-
+            _p1RoundIndicator[player1RoundsWon].color = _roundScript.koType[CheckPerfectKO(_playerHealthBars[player1].value)];//Check Player 1 HP 
             playerArray[player1].GetComponent<PlayerControllerTest>().roundsWon++; //Give Player 2 a round point
         }
 
