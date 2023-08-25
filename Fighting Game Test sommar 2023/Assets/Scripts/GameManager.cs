@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Image[] _p1RoundIndicator;
     [SerializeField] private Image[] _p2RoundIndicator;
     bool _roundsOver = false;
-    bool _GAME= false;
+    bool _pause = false;
 
 
     [Header("KOSplashArt")]
@@ -79,7 +79,11 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        _roundTimer -= Time.deltaTime;
+        if (!_pause)
+        {
+            _roundTimer -= Time.deltaTime;
+        }
+       
         _roundTimer = Mathf.Clamp(_roundTimer, 0, 99);
 
         _clockText.text = ((int)Mathf.Round(_roundTimer)).ToString();
@@ -133,7 +137,6 @@ public class GameManager : MonoBehaviour
 
                 GiveRoundPoint(i, "NormalKO");
             }
-
         }
     }
 
@@ -163,9 +166,9 @@ public class GameManager : MonoBehaviour
    
     string CheckPerfectKO(float winnerHP, int round)
     {
-        if (round == 0 && winnerHP > 100)
+        if (round == 0 && winnerHP < 100)
         {
-            _perfectSplashScreen.SetActive(true);
+            _koSplashScreen.SetActive(true);
             return "NormalKO";
         }
         if (round == 0 && winnerHP == 100)
@@ -183,6 +186,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator WaitRestartRound()
     {
+        _pause = true;
         yield return new WaitForSeconds(5);
         ResetRound();
     }
@@ -202,6 +206,7 @@ public class GameManager : MonoBehaviour
         playerArray[player1].transform.position = spawnPositionsP1;
         playerArray[player2].transform.position = spawnPositionsP2;
         _roundsOver = false;
+        _pause = false;
     }
 
     void GameSet()
